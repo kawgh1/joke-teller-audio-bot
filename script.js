@@ -2,7 +2,15 @@
 const button = document.getElementById('button');
 const audioElement = document.getElementById('audio');
 
+const ctx = new AudioContext();
+let audio;
+
+
 // see voiceRSS.js for Text-to-Speech Javascript JDK and API
+
+
+
+
 
 // Disable/Enable joke button
 function toggleButton() {
@@ -22,7 +30,7 @@ function tellMe(joke) {
     const jokeString = joke.trim().replace(/ /g, '%20');
 
     // voiceRSS - global constant in voiceRSS.js
-    VoiceRSS.speech({
+    jokeAudio = VoiceRSS.speech({
         // Normally would put this API key and function call on back end server away from front end public view,
         // but since it is free and hundreds of API calls per day, ok
         key: '426253aae55f4600a7588c562673c81f', /* API key */
@@ -33,6 +41,15 @@ function tellMe(joke) {
         f: '44khz_16bit_stereo',
         ssml: false
     });
+
+    fetch(jokeAudio)
+        .then(data => data.arrayBuffer())
+        .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
+        .then(decodedAudio => {
+            audio = decodedAudio;
+        });
+
+    playback();
 }
 
 
@@ -74,6 +91,22 @@ async function getJokes() {
         console.log('oops', error);
     }
 }
+
+
+// Web Audio API for mobile browser sounds (wont work without)
+
+function playback() {
+
+    const playSound = ctx.createBufferSource();
+    playSound.buffer = audio;
+    playSound.connect(ctx.destination);
+    playSound.start(ctx.currentTime);
+}
+
+
+
+
+
 
 // Event Listeners
 

@@ -55,7 +55,9 @@ const VoiceRSS = {
 
                 let e = t.responseText;
                 audioElement.src = e,
-                    audioElement.onloadedmetadata = (() => { audioElement.play(); })
+                    audioElement.onloadedmetadata = (() => {
+                        audioElement.play();
+                    })
             }
         },
 
