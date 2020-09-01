@@ -22,6 +22,18 @@ body {
   background-position: left center;
   background-repeat: no-repeat;
 }
+a {
+  cursor: pointer;
+  outline: none; /* no blue outline on button on click */
+  width:  200px;
+  text-decoration: none;
+
+  height: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  color: whitesmoke;
+
+}
 
 button {
   cursor: pointer;
@@ -31,7 +43,7 @@ button {
   height: 50px;
   font-family: 'Courier New', Courier, monospace;
   font-size: 20px;
-  color: white;
+  color: whitesmoke;
   background: #ff2483;
   border: none;
   border-radius: 5px;
