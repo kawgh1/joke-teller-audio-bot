@@ -19,12 +19,14 @@ function tellMe(joke) {
 
     // console.log('tell me: ', joke);
 
+    const jokeString = joke.trim().replace(/ /g, '%20');
+
     // voiceRSS - global constant in voiceRSS.js
     VoiceRSS.speech({
         // Normally would put this API key and function call on back end server away from front end public view,
         // but since it is free and hundreds of API calls per day, ok
         key: '426253aae55f4600a7588c562673c81f', /* API key */
-        src: joke,
+        src: jokeString,
         hl: 'en-us',
         r: 0,
         c: 'mp3',
